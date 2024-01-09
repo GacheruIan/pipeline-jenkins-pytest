@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm: [
+                    $class: 'GitSCM', 
+                    branches: [
+                        [name: '*/python']
+                    ], 
+                    extensions: [], 
+                    userRemoteConfigs: [
+                        [
+                            credentialsId: 'e24733f2-0180-413e-a9d0-a229911cb27b', 
+                            url: 'https://github.com/GacheruIan/pipeline-jenkins-pytest.git'
+                        ]
+                    ]
+                ]
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Success"
+            }
+        }
+    }
+}
